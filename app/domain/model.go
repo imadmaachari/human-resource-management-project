@@ -1,6 +1,10 @@
 package domain
 
-import "context"
+import (
+	"context"
+
+	"github.com/gin-gonic/gin"
+)
 
 //Book ...
 type User struct {
@@ -26,4 +30,14 @@ type UserUsecase interface {
 	GetUserProfileByID(ctx context.Context, id string) (User, error)
 	UpdateUserProfile(ctx context.Context, user User) (User, error)
 	DeleteUserProfile(ctx context.Context, id string) error
+}
+
+//UserUsecase ...
+type UserHandler interface {
+	Route(r *gin.RouterGroup)
+	AddUserProfile(ctx *gin.Context)
+	FetchUsersProfiles(ctx *gin.Context)
+	GetUserProfileByID(ctx *gin.Context)
+	UpdateUserProfile(ctx *gin.Context)
+	DeleteUserProfile(ctx *gin.Context)
 }

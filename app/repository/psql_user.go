@@ -2,8 +2,8 @@ package repository
 
 import (
 	"context"
-	domain "go-grpc-exemple/app/domain"
-	infrastructure "go-grpc-exemple/app/infrastructure"
+	domain "user-management-project/app/domain"
+	infrastructure "user-management-project/infrastructure/utils"
 )
 
 type UserRepositoryImpl struct {

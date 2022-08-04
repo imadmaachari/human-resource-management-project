@@ -2,7 +2,7 @@ package usecase
 
 import (
 	"context"
-	domain "go-grpc-exemple/app/domain"
+	domain "user-management-project/app/domain"
 
 	"github.com/satori/uuid"
 )

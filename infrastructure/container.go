@@ -1,10 +1,10 @@
 package infrastructure
 
 import (
-	booksrepo "go-starling-middleware/app/repository/pg/book"
-	booksservice "go-starling-middleware/app/usecase/book"
-	domain "go-starling-middleware/domain/book"
-	"go-starling-middleware/infrastructure/utils"
+	domain "user-management-project/app/domain"
+	repositories "user-management-project/app/repository"
+	services "user-management-project/app/usecase"
+	"user-management-project/infrastructure/utils"
 )
 
 //Declare services/repos/components here
@@ -13,7 +13,7 @@ type Container struct {
 }
 
 type Services struct {
-	BookService domain.BookUsecase
+	UserService domain.UserUsecase
 }
 
 //Inject represent the starter of our IoC container
@@ -23,12 +23,12 @@ func Inject() Container {
 	//Init Databases
 	bdbs := utils.NewDatabase()
 	//Init Repositories
-	br := booksrepo.NewBookRepository(bdbs)
+	ur := repositories.NewUserRepository(bdbs)
 	//Init Services
-	bs := booksservice.NewBookUsecase(br)
+	us := services.NewUserUseCase(ur)
 
 	services := Services{
-		BookService: bs,
+		UserService: us,
 	}
 
 	return Container{

@@ -1,22 +1,23 @@
 package http
 
 import (
-	controllers "go-starling-middleware/app/controller"
 	"log"
 	"net/http"
+	controllers "user-management-project/app/controller"
+	domain "user-management-project/app/domain"
 
-	container "go-starling-middleware/infrastructure"
+	container "user-management-project/infrastructure"
 
 	"github.com/gin-gonic/gin"
 )
 
 type Handlers struct {
-	Book *controllers.BookHandler
+	User domain.UserHandler
 }
 
 func initHandlers(di container.Container) Handlers {
 	return Handlers{
-		Book: controllers.NewBookHandler(di.Services.BookService),
+		User: controllers.NewUserHandler(di.Services.UserService),
 	}
 }
 
@@ -26,12 +27,12 @@ func StartServer(di container.Container) {
 
 	r := gin.Default()
 	r.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"data": "Rest api for ebooks managements ."})
+		c.JSON(http.StatusOK, gin.H{"data": "Rest api for HR managements ."})
 	})
 
 	routeGroup := r.Group("/v1")
 
-	handlers.Book.Route(routeGroup)
+	handlers.User.Route(routeGroup)
 
-	r.Run(":9191")
+	r.Run(":8080")
 }
